@@ -49,7 +49,7 @@ Using `vue-script2` with [`vue-router`](https://github.com/vuejs/vue-router) is 
 
 Boom!
 
-And don't worry, `script2` won't re-download scripts if they're already loaded [(unless you want them to)]((#reloading-scripts).
+And don't worry, `script2` won't re-download scripts if they're already loaded, [unless you want them to]((#reloading-scripts).
 
 ##### Promise-based imperative loading too!
 
@@ -120,7 +120,7 @@ Some scripts like widget scripts, which inject markup in-place, need the ability
 ```html
 <!-- Both scripts will be loaded -->
 <script2 src="//example.com/lib.js" reload></script2>
-<script src="//example.com/lib.js" reload></script>
+<script2 src="//example.com/lib.js" reload></script2>
 ```
 
 ## Writing `<script>` instead of `<script2>` using `script2ify`
