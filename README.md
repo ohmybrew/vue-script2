@@ -49,7 +49,7 @@ Using `vue-script2` with [`vue-router`](https://github.com/vuejs/vue-router) is 
 
 Boom!
 
-And don't worry, `script2` won't re-download scripts if they're already loaded.
+And don't worry, `script2` won't re-download scripts if they're already loaded [(unless you want them to)]((#reloading-scripts).
 
 ##### Promise-based imperative loading too!
 
@@ -103,6 +103,26 @@ You can mix and match so that some `<script2>` tags are loaded immediately while
 <script2 src="lib.js" async></script2>
 ```
 
+##### Data attributes
+
+You can specify data attributes for script tag by binding an object. All keys should be in camelCase which will be converted by the browser on creation.
+
+```html
+<script2 src="//example.com/lib.js" :data="{ feedId: '23saxK', theme: 'red' }"></script2>
+<!-- This turns into -->
+<script src="//example.com/lib.js" data-feed-id="23saxK" data-theme="red"></script>
+```
+
+##### Reloading scripts
+
+Some scripts like widget scripts, which inject markup in-place, need the ability to be called multiple times so they can display in multiple places. By default, Script2 will not inject the same src more than once. To get around this, add the `reload` attribute to your `script2` tag.
+
+```html
+<!-- Both scripts will be loaded -->
+<script2 src="//example.com/lib.js" reload></script2>
+<script src="//example.com/lib.js" reload></script>
+```
+
 ## Writing `<script>` instead of `<script2>` using `script2ify`
 
 The `script2ify` [browserify](https://github.com/substack/node-browserify) transform below will (fairly safely) dynamically replace `<script>` tags with `<script2>` tags within `.ejs`, `.html`, and even `.vue` files!
@@ -135,6 +155,7 @@ function script2ify (file) {
 
 ## History
 
+- __2.1.0__ - ESLinted for AirBnb standard, added support for reloading scripts, added support for data attributes
 - __2.0.0__ - Vue 2.x compatible. Requires Vue 2.x. Use 1.2.2 for Vue 1.x.
 - __1.2.2__ - Fixes broken `crossorigin` attribute (thx @grempe!)
 - __1.2.1__ - Just a bit of perfectionism to fix a non-issue issue
