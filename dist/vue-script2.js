@@ -119,7 +119,7 @@ var Script2 = {
     }
 
     // Custom attributes not part of <script> tags
-    var customAttrs = ['unload', 'data', 'reload'];
+    var customAttrs = ['unload', 'data', 'reload', 'delay'];
 
     // from: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script
     // 'async' and 'defer' don't allow document.write according to:
@@ -220,7 +220,7 @@ var Script2 = {
       var s = document.createElement('script');
 
       // omit the special options that Script2 supports
-      _.defaults2(s, _.omit(opts, ['unload', 'parent', 'reload', 'data']), { type: 'text/javascript' });
+      _.defaults2(s, _.omit(opts, ['unload', 'parent', 'reload', 'data', 'delay']), { type: 'text/javascript' });
 
       // according to: http://www.html5rocks.com/en/tutorials/speed/script-loading/
       // async does not like 'document.write' usage, which we & vue.js make
@@ -262,7 +262,9 @@ var Script2 = {
       };
 
       // Append the script to the DOM
-      opts.parent.appendChild(s);
+      setTimeout(function () {
+        return opts.parent.appendChild(s);
+      }, opts.delay || 0);
     });
   }
 };

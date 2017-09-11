@@ -80,6 +80,14 @@ $(document).ready(function () {
 </script2>
 ```
 
+##### Delayed inclusion of external JavaScript
+
+Some scripts rely on the DOM being completely present (like some widgets) which are not customizable at all. If you need a slight delay for some reason on a script, you may pass `delay` in the `script2` tag.
+
+```html
+<script2 src="..." delay="1000"></script2> <!-- 1000ms delay -->
+```
+
 ##### Cleanup unused resources with the `unload` attribute
 
 The `unload` attribute accepts JS expressions to run when the component is destroyed. This prevents your SPA from accumulating stuff in memory that's not being used:
